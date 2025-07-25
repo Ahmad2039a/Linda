@@ -73,7 +73,6 @@
             display: block;
             max-width: 80%;
             max-height: 80%;
-            /* Added animation for image modal */
             animation: zoomIn 0.4s ease-out;
         }
         .modal-close {
@@ -89,7 +88,6 @@
         .surprise-modal-content {
             animation: zoomIn 0.4s ease-out;
         }
-        /* Shared zoom-in animation */
         @keyframes zoomIn {
             from {
                 transform: scale(0.5);
@@ -99,6 +97,34 @@
                 transform: scale(1);
                 opacity: 1;
             }
+        }
+        /* --- Scroller Styles (FINAL FIX) --- */
+        .scroller {
+            -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+            mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+        }
+        .scroller-inner {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            width: max-content;
+            animation: scroll 40s linear infinite;
+        }
+        .scroller:hover .scroller-inner {
+            animation-play-state: paused;
+        }
+        @keyframes scroll {
+            to {
+                /* Precise calculation for 8 items: (8 images * 16rem width) + (8 gaps * 1rem) = 136rem */
+                transform: translateX(-136rem);
+            }
+        }
+        .scroller-inner .gallery-img {
+            height: 16rem; /* 256px */
+            width: 16rem; /* 256px */
+            object-fit: cover;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
         }
     </style>
 </head>
@@ -120,25 +146,21 @@
         <section class="mb-20">
             <h2 class="title-font text-4xl text-center text-white mb-10 drop-shadow-md fade-in-up" style="animation-delay: 0.4s;">لماذا ليندا روح لا مثيل لها؟</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Card 1 -->
-                <div class="card bg-white bg-opacity-70 backdrop-blur-sm p-6 rounded-2xl text-center fade-in-up" style="animation-delay: 0.6s;">
+                 <div class="card bg-white bg-opacity-70 backdrop-blur-sm p-6 rounded-2xl text-center fade-in-up" style="animation-delay: 0.6s;">
                     <div class="text-5xl mb-4">💖</div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-2">قلب من ذهب</h3>
                     <p class="text-gray-600">طيبة وحنونة، دائمًا على استعداد للمساعدة ومد يد العون للجميع دون تردد.</p>
                 </div>
-                <!-- Card 2 -->
                 <div class="card bg-white bg-opacity-70 backdrop-blur-sm p-6 rounded-2xl text-center fade-in-up" style="animation-delay: 0.8s;">
                     <div class="text-5xl mb-4">😂</div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-2">ضحكة معدية</h3>
                     <p class="text-gray-600">تملك روحًا مرحة وضحكة قادرة على أن تضيء أي مكان وتنسيك همومك.</p>
                 </div>
-                <!-- Card 3 -->
                 <div class="card bg-white bg-opacity-70 backdrop-blur-sm p-6 rounded-2xl text-center fade-in-up" style="animation-delay: 1s;">
                     <div class="text-5xl mb-4">🧠</div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-2">ذكاء وطموح</h3>
                     <p class="text-gray-600">فتاة ذكية وملهمة، تسعى دائمًا لتحقيق أحلامها وتطور من نفسها باستمرار.</p>
                 </div>
-                <!-- Card 4 -->
                 <div class="card bg-white bg-opacity-70 backdrop-blur-sm p-6 rounded-2xl text-center fade-in-up" style="animation-delay: 1.2s;">
                     <div class="text-5xl mb-4">🤝</div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-2">السند الحقيقي</h3>
@@ -148,23 +170,34 @@
         </section>
 
         <!-- Gallery Section -->
-        <section class="mb-20">
-            <h2 class="title-font text-4xl text-center text-white mb-10 drop-shadow-md fade-in-up">معرض الذكريات</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <img src="1.png" alt="[صورة ذكرى 1]" class="gallery-img rounded-lg shadow-lg fade-in-up" style="animation-delay: 0.2s;">
-                <img src="2.png" alt="[صورة ذكرى 2]" class="gallery-img rounded-lg shadow-lg fade-in-up" style="animation-delay: 0.4s;">
-                <img src="3.png" alt="[صورة ذكرى 3]" class="gallery-img rounded-lg shadow-lg fade-in-up" style="animation-delay: 0.6s;">
-                <img src="4.png" alt="[صورة ذكرى 4]" class="gallery-img rounded-lg shadow-lg fade-in-up" style="animation-delay: 0.8s;">
-                <!-- New images added below -->
-                <img src="5.png" alt="[صورة ذكرى 5]" class="gallery-img rounded-lg shadow-lg fade-in-up" style="animation-delay: 1s;">
-                <img src="6.png" alt="[صورة ذكرى 6]" class="gallery-img rounded-lg shadow-lg fade-in-up" style="animation-delay: 1.2s;">
-                <img src="7.png" alt="[صورة ذكرى 7]" class="gallery-img rounded-lg shadow-lg fade-in-up" style="animation-delay: 1.4s;">
-                <img src="8.png" alt="[صورة ذكرى 8]" class="gallery-img rounded-lg shadow-lg fade-in-up" style="animation-delay: 1.6s;">
+        <section class="mb-20 w-full">
+            <h2 class="title-font text-4xl text-center text-white mb-10 drop-shadow-md fade-in-up">معرض الذكريات المتحرك</h2>
+            <div class="scroller w-full overflow-hidden">
+                <div class="scroller-inner">
+                    <!-- Original Images -->
+                    <img src="1.png" alt="[صورة ذكرى 1]" class="gallery-img">
+                    <img src="2.png" alt="[صورة ذكرى 2]" class="gallery-img">
+                    <img src="3.png" alt="[صورة ذكرى 3]" class="gallery-img">
+                    <img src="4.png" alt="[صورة ذكرى 4]" class="gallery-img">
+                    <img src="5.png" alt="[صورة ذكرى 5]" class="gallery-img">
+                    <img src="6.png" alt="[صورة ذكرى 6]" class="gallery-img">
+                    <img src="7.png" alt="[صورة ذكرى 7]" class="gallery-img">
+                    <img src="8.png" alt="[صورة ذكرى 8]" class="gallery-img">
+                    <!-- Duplicated Images for seamless loop -->
+                    <img src="1.png" alt="[صورة ذكرى 1]" class="gallery-img" aria-hidden="true">
+                    <img src="2.png" alt="[صورة ذكرى 2]" class="gallery-img" aria-hidden="true">
+                    <img src="3.png" alt="[صورة ذكرى 3]" class="gallery-img" aria-hidden="true">
+                    <img src="4.png" alt="[صورة ذكرى 4]" class="gallery-img" aria-hidden="true">
+                    <img src="5.png" alt="[صورة ذكرى 5]" class="gallery-img" aria-hidden="true">
+                    <img src="6.png" alt="[صورة ذكرى 6]" class="gallery-img" aria-hidden="true">
+                    <img src="7.png" alt="[صورة ذكرى 7]" class="gallery-img" aria-hidden="true">
+                    <img src="8.png" alt="[صورة ذكرى 8]" class="gallery-img" aria-hidden="true">
+                </div>
             </div>
         </section>
 
         <!-- Message Section -->
-        <section class="text-center">
+        <section class="text-center mb-20">
             <h2 class="title-font text-4xl text-white mb-6 drop-shadow-md fade-in-up">كلمة من القلب</h2>
             <div class="max-w-3xl mx-auto bg-white bg-opacity-70 backdrop-blur-sm p-8 rounded-2xl shadow-lg fade-in-up" style="animation-delay: 0.5s;">
                 <p class="text-xl leading-loose text-gray-700">
@@ -173,6 +206,26 @@
                 <button id="surprise-btn" class="mt-8 bg-pink-400 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-pink-500 transition-all duration-300 transform hover:scale-110">
                     اضغطي هنا لمفاجأة!
                 </button>
+            </div>
+        </section>
+        
+        <!-- AI Poem Section -->
+        <section id="ai-poem" class="mb-20 text-center">
+            <h2 class="title-font text-4xl text-white mb-6 drop-shadow-md fade-in-up">قصيدة من إلهام الذكاء الاصطناعي</h2>
+            <div class="max-w-3xl mx-auto bg-white bg-opacity-70 backdrop-blur-sm p-8 rounded-2xl shadow-lg fade-in-up" style="animation-delay: 0.5s;">
+                <p class="text-xl leading-loose text-gray-700 mb-6">
+                    لأن الكلمات قد لا تكفي أحيانًا، دع الذكاء الاصطناعي يساعد في التعبير عن مدى روعة ليندا.
+                </p>
+                <button id="generate-poem-btn" class="bg-teal-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-teal-600 transition-all duration-300 transform hover:scale-110 disabled:opacity-50">
+                    اكتب قصيدة لليندا
+                </button>
+                <div id="poem-loader" class="mt-8" style="display: none;">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-500 mx-auto"></div>
+                    <p class="mt-2 text-gray-600">جاري كتابة القصيدة...</p>
+                </div>
+                <div id="poem-container" class="mt-8 text-lg text-gray-800 whitespace-pre-wrap p-4 bg-white bg-opacity-50 rounded-lg" style="display: none;">
+                    <!-- Poem will be displayed here -->
+                </div>
             </div>
         </section>
 
@@ -205,18 +258,13 @@
             const colors = ['#fde2e4', '#dfe7fd', '#e2f0d9', '#fef9c3', '#fce1e4'];
             let colorIndex = 0;
 
-            // Function to change background color
             function changeBackgroundColor() {
                 colorIndex = (colorIndex + 1) % colors.length;
                 body.style.backgroundColor = colors[colorIndex];
             }
-
-            // Change color every 5 seconds
             setInterval(changeBackgroundColor, 5000);
-            // Set initial color
             body.style.backgroundColor = colors[0];
 
-            // Create background particles
             for (let i = 0; i < 30; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
@@ -229,7 +277,7 @@
                 particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
                 particleContainer.appendChild(particle);
             }
-            
+
             // Surprise button logic
             const surpriseBtn = document.getElementById('surprise-btn');
             const surpriseModal = document.getElementById('surpriseModal');
@@ -238,29 +286,78 @@
             surpriseBtn.addEventListener('click', () => {
                 surpriseModal.style.display = "flex";
             });
-
             surpriseCloseBtn.addEventListener('click', () => {
                 surpriseModal.style.display = "none";
             });
 
-            // Image Gallery Modal
+            // Image Gallery Modal Logic
             const imageModal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
-            const galleryImages = document.querySelectorAll('.gallery-img');
             const imageCloseBtn = document.querySelector('.modal-close');
-
-            galleryImages.forEach(img => {
-                img.addEventListener('click', function() {
+            
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('gallery-img')) {
                     imageModal.style.display = "flex";
-                    modalImg.src = this.src;
-                });
+                    modalImg.src = e.target.src;
+                }
             });
 
             imageCloseBtn.addEventListener('click', () => {
                 imageModal.style.display = "none";
             });
 
-            // Close modals when clicking on the background
+            // Gemini API Poem Generator
+            const generatePoemBtn = document.getElementById('generate-poem-btn');
+            const poemContainer = document.getElementById('poem-container');
+            const poemLoader = document.getElementById('poem-loader');
+
+            generatePoemBtn.addEventListener('click', async () => {
+                poemContainer.style.display = 'none';
+                poemLoader.style.display = 'block';
+                generatePoemBtn.disabled = true;
+
+                const prompt = "اكتب قصيدة قصيرة وجميلة من 4 أبيات لصديقة عزيزة اسمها ليندا، أظهر فيها كم هي رائعة ومميزة بقلبها الطيب وضحكتها المشرقة.";
+                
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // API key will be provided by the environment
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        poemContainer.textContent = text;
+                        poemContainer.style.display = 'block';
+                    } else {
+                        poemContainer.textContent = 'عذراً، لم أتمكن من كتابة قصيدة الآن. الرجاء المحاولة مرة أخرى.';
+                        poemContainer.style.display = 'block';
+                    }
+                } catch (error) {
+                    console.error("Error generating poem:", error);
+                    poemContainer.textContent = 'عذراً، حدث خطأ أثناء الاتصال بالخادم. قد تكون هناك مشكلة مؤقتة. يرجى المحاولة مرة أخرى لاحقاً.';
+                    poemContainer.style.display = 'block';
+                } finally {
+                    poemLoader.style.display = 'none';
+                    generatePoemBtn.disabled = false;
+                }
+            });
+
+
             window.addEventListener('click', (e) => {
                 if (e.target === imageModal) {
                     imageModal.style.display = "none";
