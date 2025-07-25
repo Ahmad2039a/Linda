@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">            
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إلى أغلى صديقة: ليندا</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,6 +73,8 @@
             display: block;
             max-width: 80%;
             max-height: 80%;
+            /* Added animation for image modal */
+            animation: zoomIn 0.4s ease-out;
         }
         .modal-close {
             position: absolute;
@@ -87,6 +89,7 @@
         .surprise-modal-content {
             animation: zoomIn 0.4s ease-out;
         }
+        /* Shared zoom-in animation */
         @keyframes zoomIn {
             from {
                 transform: scale(0.5);
